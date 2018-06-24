@@ -18,17 +18,20 @@ public:
 	}
 
     Point()
-    	{
+	{
     	x = 0;
 		y = 0;
 		
-    	}
+    }
+
     int getX() { 
 	return x;
     }
-	int getY() { 
+	int getY()
+	{
 		return y;
-		}
+    }
+
 	Point operator + (Point const &P2) {
     Point P3;
 	P3.x = x + P2.x;
