@@ -10,14 +10,8 @@ using namespace std;
 int main()
 {
 
-    vector <int>  int_v;
+    vector <int>  int_v(10);
 
-
-    for( int i=0;i<10;i++) {
-        int_v.push_back(i);
-
-        int_v[i] = 2;
-        cout << "vector " << "i = " << i << int_v.at(i);
 
     }
 
