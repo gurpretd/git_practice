@@ -11,51 +11,60 @@
 #include <string>
 using namespace std;
 void forintegers();
-void forstrings();
+void print_vector(vector <int> vec);
 int main()
 {
 
-forstrings();
 forintegers();
 }
 
-void forstrings()
-{
-
-  vector <string> vec;
-  for(int i = 0 ; i<10; i ++) {
-  string p;
-  cout << "Enter string " << i << endl;
-  cin >> p;
-  vec.push_back(p);
-}
-for (int i=0; i<10; i++){
-  cout << "vec " << "=" <<vec.at(i) <<endl;
-}
-cout << "vec at 5  = " <<vec.at(5) << "or " <<vec[5];
 
 
 
-for (vector<string>::iterator it = vec.begin(); it!=vec.end(); it++) {
-    cout << *it << endl;
-}
-
-}
 void forintegers()
 {
-  return;
+  int num=0;
   vector <int> vec;
-  for(int i = 0 ; i<10; i ++) {
-  int p;
-  cout << "Enter number " << i << endl;
-  cin >> p;
-  vec.push_back(p);
-}
-for (int i=0; i<10; i++){
-  cout << "vec " << "=" <<vec.at(i) <<endl;
 
-cout << "vec at 5  = " <<vec.at(5) << "or " <<vec[5];
+  while(true) { 
+	  cout << "Enter number ";
+      cin >> num;
+	  vec.push_back(num);
+      cout << "Do you want to enter another number y/n? ";
+	  char c;
+	  cin>>c;
+
+	  if(c == 'y')
+			continue;
+	  else
+            break;		  
+	  
+  }
+  print_vector(vec);
+
+
+  vec.insert(vec.begin()+2,5,444);
+
+  print_vector(vec);
+
+vector <int> vec2(vec);
+
+
+ print_vector(vec2);
+ 
+//vec2.insert(vec.begin(),vec.begin(),vec.end());
 
 }
+void print_vector(vector <int> vec)
+{
+	 cout << "capacity "<< vec.capacity()  << "max size" << vec.max_size() << endl;
+ 
+	for (int i=0; i<vec.size(); i++){
+		cout << "vec " << "=" <<vec.at(i) <<endl;
+
+	}
+	cout << "END" << endl;
 }
+
+
 
