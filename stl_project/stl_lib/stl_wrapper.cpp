@@ -1,40 +1,80 @@
-#include <iostream>
 #include "stl_wrapper.h"
-#include "vector_stl.h"
 #include "map_stl.h"
+#include "vector_stl.h"
+#include <iostream>
+
+#define __CLASS__ "stl_wrapper"
 using namespace std;
-
-Error stl_wrapper::Create(Type type, STL_Interface **intf)
-{
+Error stl_wrapper::Create(Type type, STL_Interface **intf) {
   Error Status = FAIL;
-
-  if(handles_[type] != nullptr) {
-      cout << "Already Allocated" << "type " << type << endl;
-      return FAIL;
+  LOG("create request for type : %d \n", type);
+  if (handles_[type] != nullptr) {
+    cout << "Already Allocated"
+         << "type " << type << endl;
+    return FAIL;
   }
 
-  if(type == VECTOR) {
+  if (type == VECTOR) {
     cout << "Creating Vector " << endl;
     handles_[type] = new vector_stl();
-  } else if(type == ORDERED_MAP) { 
-      cout << "Creating Map " << endl;
-
+  } else if (type == ORDERED_MAP) {
+    cout << "Creating Map " << endl;
     handles_[type] = new map_stl();
-
   }
+
   *intf = handles_[type];
-
-   return Status;
+  return SUCCESS;
 }
 
-Error stl_wrapper::Destroy(Type type)
-{
-cout << "Destroy no op";
+Error stl_wrapper::Destroy(Type type) { cout << "Destroy no op"; }
+
+void stl_wrapper::print_ops_menu() {
+  for (int i = PUSH_BACK; i < MAX_OPS; i++) {
+    cout << std::endl << "Press " << i << " for";
+
+    switch (i) {
+    case PUSH_BACK:
+      std::cout << " PUSH_BACK ";
+      break;
+    case INSERT:
+      std::cout << " INSERT";
+      break;
+    case TRAVERSE:
+      std::cout << " TRAVERSE";
+      break;
+    case CLEAR:
+      std::cout << " CLEAR";
+      break;
+    case ERASE:
+      std::cout << " ERASE";
+      break;
+    case FIND:
+      std::cout << " FIND";
+      break;
+    case SIZE:
+      std::cout << " SIZE ";
+      break;
+    defaut:
+      std::cout << "*** ERROR -  Undefined OP *** ";
+    }
+  }
 }
 
-stl_wrapper::stl_wrapper() { 
-  std::cout << "ctor stl_wrapper";
-  for(int i=0 ; i< MAX_TYPES ; i ++) { 
-    handles_[i]=nullptr;
+void stl_wrapper::print_container_menu() {
+  for (int i = VECTOR; i < MAX_TYPES; i++) {
+    cout << std::endl << "Press " << i << " for";
+    switch (i) {
+    case VECTOR:
+      std::cout << " VECTOR ";
+      break;
+    case ORDERED_MAP:
+      std::cout << " JUST/ORDERED MAP";
+      break;
+    case UNORDERED_MAP:
+      std::cout << " UNORDERED MAP";
+      break;
+    defaut:
+      std::cout << "*** ERROR -  Undefined Container *** ";
+    }
   }
 }

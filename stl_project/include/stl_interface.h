@@ -5,24 +5,25 @@
 #define SUCCESS 0
 
 #include <iostream>
-
+typedef unsigned int uint32_t;
 typedef unsigned int Error;
 
+#define LOG_BEGIN printf(" %s BEGIN ", __FUNCTION__);
+#define LOG_END printf(" %s END ", __FUNCTION__);
 
-enum Type { 
-VECTOR,
-ORDERED_MAP,
-UNORDERED_MAP,
-MAX_TYPES
+#define LOG(format, ...)                                                       \
+  printf(" %s::%s:: " format, __CLASS__, __FUNCTION__, __VA_ARGS__);
 
-};
+class STL_Interface {
 
-class STL_Interface { 
-
-public :
-    virtual Error Insert(int pos, void *val) = 0;
-    virtual Error Traverse() = 0;
-
+public:
+  virtual Error Insert(uint32_t pos, uint32_t val) = 0;
+  virtual Error Push_back(uint32_t val) = 0;
+  virtual Error Traverse(void) = 0;
+  virtual Error Erase(uint32_t pos) = 0;
+  virtual Error Size(uint32_t &size) = 0;
+  virtual Error Find(uint32_t val) = 0;
+  virtual Error Clear(void) = 0;
 };
 
 #endif
