@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2019, Dhami's
+ * Copyright 2019
+ */
+
 #include <stl_interface.h>
 #include <stl_wrapper.h>
 
@@ -53,31 +58,39 @@ int main() {
       continue;
     }
 
-    int value;
-    int pos;
-    uint32_t size;
-
+    int value = 0;
+    int pos = 0;
+    uint32_t size = 0;
+    int key = 0;
     switch (ops) {
-
     case PUSH_BACK:
       std::cout << "Enter Value : ";
       std::cin >> value;
       status = stl_intf[container_type]->Push_back(value);
       if (status != SUCCESS) {
         LOG("Failed operation %d \n", ops);
-        continue;
       }
       break;
 
     case INSERT:
+
+      if (container_type == ORDERED_MAP) {
+        std::cout << "Enter Key : ";
+        std::cin >> key;
+      }
       std::cout << "Enter Value : ";
       std::cin >> value;
-      std::cout << "Enter Pos : ";
-      std::cin >> pos;
-      status = stl_intf[container_type]->Insert(pos, value);
+
+      if (container_type == VECTOR) {
+        std::cout << "Enter Pos : ";
+        std::cin >> pos;
+      }
+      Value_s val;
+      val.key = key;
+      val.value = value;
+      status = stl_intf[container_type]->Insert(pos, &val);
       if (status != SUCCESS) {
         LOG("Failed operation %d \n", ops);
-        continue;
       }
       break;
 
@@ -85,7 +98,6 @@ int main() {
       status = stl_intf[container_type]->Traverse();
       if (status != SUCCESS) {
         LOG("Failed operation %d \n", ops);
-        continue;
       }
       break;
 
@@ -95,7 +107,6 @@ int main() {
       status = stl_intf[container_type]->Erase(pos);
       if (status != SUCCESS) {
         LOG("Failed operation %d \n", ops);
-        continue;
       }
       break;
 
@@ -103,7 +114,6 @@ int main() {
       status = stl_intf[container_type]->Clear();
       if (status != SUCCESS) {
         LOG("Failed operation %d \n", ops);
-        continue;
       }
       break;
 
@@ -112,20 +122,22 @@ int main() {
       status = stl_intf[container_type]->Size(size);
       if (status != SUCCESS) {
         LOG("Failed operation %d \n", ops);
-        continue;
       }
 
       LOG("Size = %d", size);
       break;
 
     case FIND:
+      if (container_type == ORDERED_MAP) {
+        std::cout << "Enter Key : ";
+      } else {
+        std::cout << "Enter Value : ";
+      }
 
-      std::cout << "Enter Value : ";
       std::cin >> value;
       status = stl_intf[container_type]->Find(value);
       if (status != SUCCESS) {
         LOG("Failed operation %d \n", ops);
-        continue;
       }
       break;
 

@@ -1,24 +1,28 @@
+/*
+ * Copyright (c) 2019, Dhami's
+ * Copyright 2019
+ */
+
+#include <iostream>
 #include "stl_wrapper.h"
 #include "map_stl.h"
 #include "vector_stl.h"
-#include <iostream>
 
 #define __CLASS__ "stl_wrapper"
-using namespace std;
 Error stl_wrapper::Create(Type type, STL_Interface **intf) {
   Error Status = FAIL;
   LOG("create request for type : %d \n", type);
   if (handles_[type] != nullptr) {
-    cout << "Already Allocated"
-         << "type " << type << endl;
+    std::cout << "Already Allocated"
+              << "type " << type << std::endl;
     return FAIL;
   }
 
   if (type == VECTOR) {
-    cout << "Creating Vector " << endl;
+    std::cout << "Creating Vector " << std::endl;
     handles_[type] = new vector_stl();
   } else if (type == ORDERED_MAP) {
-    cout << "Creating Map " << endl;
+    std::cout << "Creating Map " << std::endl;
     handles_[type] = new map_stl();
   }
 
@@ -26,11 +30,11 @@ Error stl_wrapper::Create(Type type, STL_Interface **intf) {
   return SUCCESS;
 }
 
-Error stl_wrapper::Destroy(Type type) { cout << "Destroy no op"; }
+Error stl_wrapper::Destroy(Type type) { std::cout << "Destroy no op"; }
 
 void stl_wrapper::print_ops_menu() {
   for (int i = PUSH_BACK; i < MAX_OPS; i++) {
-    cout << std::endl << "Press " << i << " for";
+    std::cout << std::endl << "Press " << i << " for";
 
     switch (i) {
     case PUSH_BACK:
@@ -62,7 +66,7 @@ void stl_wrapper::print_ops_menu() {
 
 void stl_wrapper::print_container_menu() {
   for (int i = VECTOR; i < MAX_TYPES; i++) {
-    cout << std::endl << "Press " << i << " for";
+    std::cout << std::endl << "Press " << i << " for";
     switch (i) {
     case VECTOR:
       std::cout << " VECTOR ";

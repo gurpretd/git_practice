@@ -1,10 +1,23 @@
+/*
+ * Copyright (c) 2019, Dhami's
+ * Copyright 2019
+ */
+
+#include <vector>
+#include <algorithm>
 #include "vector_stl.h"
 
-using namespace std;
 #define __CLASS__ "vector_stl"
-Error vector_stl::Insert(uint32_t pos, uint32_t val) {
+Error vector_stl::Insert(uint32_t pos, void *val) {
   LOG_BEGIN;
-  vec.insert(vec.begin() + pos, val);
+  Value_s *value = nullptr;
+  if (val == nullptr) {
+    std::cout << "Insert Failure ";
+    return FAIL;
+  }
+  value = static_cast<Value_s *>(val);
+  std::cout << " Value  = " << value->value;
+  vec.insert(vec.begin() + pos, value->value);
 
   LOG_END;
   return SUCCESS;
@@ -40,12 +53,8 @@ Error vector_stl::Size(uint32_t &size) {
 
 Error vector_stl::Find(uint32_t val) {
   std::vector<int>::iterator it;
-
-  for (it = vec.begin(); it < vec.end(); it++) {
-    if (*it == val)
-      break;
-  }
-
+// std:vector does not provide any direct function find.
+  it = std::find(vec.begin(), vec.end(), val);
   if (it == vec.end())
     return FAIL;
 
