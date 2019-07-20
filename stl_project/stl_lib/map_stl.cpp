@@ -42,18 +42,23 @@ Error map_stl::Traverse() {
   return SUCCESS;
 }
 
-Error map_stl::Erase(uint32_t pos) {
+Error map_stl::Erase(uint32_t val) {
   LOG_BEGIN;
-
+  std::map<uint32_t,uint32_t>::iterator itr;
+  itr = map_handle.find(val);
+  if(itr != map_handle.end()) { 
+    map_handle.erase(itr);
+  } else { 
+    return FAIL;
+  }
   LOG_END;
   return SUCCESS;
 }
 
 Error map_stl::Size(uint32_t &size) {
   LOG_BEGIN;
-
+    size = map_handle.size();
   LOG_END;
-
   return SUCCESS;
 }
 
@@ -73,6 +78,7 @@ Error map_stl::Find(uint32_t val) {
 
 Error map_stl::Clear(void) {
   LOG_BEGIN;
+  map_handle.clear();
 
   LOG_END;
   return SUCCESS;
