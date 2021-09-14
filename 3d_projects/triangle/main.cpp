@@ -573,6 +573,8 @@ int main(void)
     MY_SAFE_RELEASE(d3dDebug);
 #endif
 
+    /* Just a dummy change */
+
     MY_SAFE_RELEASE(dxDevice);
 
     return 0;
